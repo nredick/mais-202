@@ -1,6 +1,7 @@
 ##### Project specific
 /DataCollection/datasets
 /DataCollection/output_files
+/DataCollection/GatherData/get_html.py
 
 ##### Windows
 # Windows thumbnail cache files
