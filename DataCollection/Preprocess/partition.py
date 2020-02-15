@@ -6,21 +6,37 @@ import random
 import shutil
 import time
 import csv
+from PIL import Image, UnidentifiedImageError
 
 
-def get_path_names():
-    directory = '../output_files/Images0'
-    newpath = '../output_files/ImagesDuplicate'
+def resize(dirs):
+    for p, name in dirs:
+        if os.path.isfile(p):
+            try:
+                im = Image.open(p)
+                resized = im.resize((300, 300), Image.ANTIALIAS)
+                resized.save(p, 'JPEG', quality=90)
+                print(f'{time.ctime()}: Resizing {p}.')
+            except UnidentifiedImageError:
+                out = '../output_files/Remainder'
+                if not path.isdir(out):
+                    os.makedirs(out)
+                print(f'{time.ctime()}: UnidentifiedImageError --> deleting {name}')
+                os.remove(p)
 
+
+def duplicate(input, output):
     print(f'{time.ctime()}: Duplicating image set.')
-    shutil.copytree(directory, newpath)
+    shutil.copytree(input, output)
 
+
+def get_path_names(input):
     images = []
-    for i in os.listdir(newpath):
+    for i in os.listdir(input):
         print(f'{time.ctime()}: Get path name for {i}.')
         name = re.findall('^[a-zA-Z]+', i)
         if len(name) > 0:
-            images.append([os.path.join(newpath, i), *re.findall('^[a-zA-Z]+', i)])
+            images.append([os.path.join(input, i), *re.findall('^[a-zA-Z]+', i)])
     random.shuffle(images)
     return images
 
@@ -72,8 +88,8 @@ def split(input, output):
 
     random.shuffle(images)
 
-    split_train = int(len(images)*.65)
-    split_valid = split_train + int(len(images)*.2)
+    split_train = int(len(images)*.5)
+    split_valid = split_train + int(len(images)*.3)
 
     names_train = []
     names_valid = []
@@ -94,7 +110,7 @@ def split(input, output):
             print(f'{time.ctime()}: Adding {img} to test dataset.')
             names_test.append(*re.findall('^[a-zA-Z]+', img))
             shutil.move(pathname, '../datasets/X_test')
-
+        '''
         with open('../datasets/y_test.csv', 'a') as w:
             writer = csv.writer(w, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             for line in names_test:
@@ -107,6 +123,7 @@ def split(input, output):
             writer = csv.writer(w, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             for line in names_train:
                 writer.writerow([line])
+        '''
 
 
 def get_classes(input_dir):
@@ -127,7 +144,14 @@ def main():
     # keep track of program runtime
     print(f'{time.ctime()}: Begin data preprocessing.')
     start_time = time.time()
-    images = get_path_names()
+
+    input = '../output_files/Images'
+    output = '../output_files/ImagesDuplicate'
+
+    duplicate(input, output)
+    images = get_path_names(output)
+    resize(images)
+    images = get_path_names(output)
     separate(images, '../output_files/Intermediate')
     remove_excess('../output_files/Intermediate')
     consolidate('../output_files/Intermediate', '../output_files/Consolidated')
