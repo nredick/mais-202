@@ -6,7 +6,7 @@ import random
 import shutil
 import time
 import csv
-from PIL import Image, UnidentifiedImageError
+from PIL import Image, UnidentifiedImageError, ImageChops
 
 
 def resize(dirs):
@@ -14,8 +14,8 @@ def resize(dirs):
         if os.path.isfile(p):
             try:
                 im = Image.open(p)
-                resized = im.resize((300, 300), Image.ANTIALIAS)
-                resized.save(p, 'JPEG', quality=90)
+                resized = im.resize((128, 128), Image.ANTIALIAS)
+                resized.save(p, 'JPEG', quality=300)
                 print(f'{time.ctime()}: Resizing {p}.')
             except UnidentifiedImageError:
                 out = '../output_files/Remainder'
@@ -77,22 +77,18 @@ def consolidate(pathname, new_path):
 
 
 def split(input, output):
-    if not path.isdir('../datasets/X_train'):
-        os.makedirs('../datasets/X_train')
-    if not path.isdir('../datasets/X_test'):
-        os.makedirs('../datasets/X_test')
-    if not path.isdir('../datasets/X_valid'):
-        os.makedirs('../datasets/X_valid')
+    if not path.isdir(f'{output}/X_train'):
+        os.makedirs(f'{output}/X_train')
+    if not path.isdir(f'{output}/X_test'):
+        os.makedirs(f'{output}/X_test')
 
     images = [img for img in os.listdir(input)]
 
     random.shuffle(images)
 
-    split_train = int(len(images)*.5)
-    split_valid = split_train + int(len(images)*.3)
+    split_train = int(len(images) * .85)
 
     names_train = []
-    names_valid = []
     names_test = []
 
     for i, img in enumerate(images):
@@ -101,40 +97,24 @@ def split(input, output):
         if i < split_train:
             print(f'{time.ctime()}: Adding {img} to train dataset.')
             names_train.append(*re.findall('^[a-zA-Z]+', img))
-            shutil.move(pathname, '../datasets/X_train')
-        elif split_train <= i < split_valid:
-            print(f'{time.ctime()}: Adding {img} to validation dataset.')
-            names_valid.append(*re.findall('^[a-zA-Z]+', img))
-            shutil.move(pathname, '../datasets/X_valid')
-        elif i >= split_valid:
+            shutil.move(pathname, f'{output}/X_train')
+
+        elif i >= split_train:
             print(f'{time.ctime()}: Adding {img} to test dataset.')
             names_test.append(*re.findall('^[a-zA-Z]+', img))
-            shutil.move(pathname, '../datasets/X_test')
-        '''
-        with open('../datasets/y_test.csv', 'a') as w:
-            writer = csv.writer(w, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for line in names_test:
-                writer.writerow([line])
-        with open('../datasets/y_valid.csv', 'a') as w:
-            writer = csv.writer(w, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for line in names_valid:
-                writer.writerow([line])
-        with open('../datasets/y_train.csv', 'a') as w:
-            writer = csv.writer(w, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            for line in names_train:
-                writer.writerow([line])
-        '''
+            shutil.move(pathname, f'{output}/X_test')
 
 
-def get_classes(input_dir):
-    if not path.isdir('../datasets'):
-        os.makedirs('../datasets')
+
+def get_classes(input_dir, output):
+    if not path.isdir(f'{output}'):
+        os.makedirs(f'{output}')
     names = []
     print(f'{time.ctime()}: Locating class distinctions for data.')
     for x in os.listdir(input_dir):
         names.extend(re.findall('^[a-zA-Z]+', x))
 
-    with open('../datasets/classes.csv', 'a') as w:
+    with open(f'{output}/classes.csv', 'a') as w:
         writer = csv.writer(w, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         for item in sorted(set(names)):
             writer.writerow([item])
@@ -145,18 +125,24 @@ def main():
     print(f'{time.ctime()}: Begin data preprocessing.')
     start_time = time.time()
 
-    input = '../output_files/Images'
+    input = '../output_files/images_2.0'
     output = '../output_files/ImagesDuplicate'
 
     duplicate(input, output)
     images = get_path_names(output)
     resize(images)
+
+    try:
+        os.system(f'image-cleaner {output}')
+    except FileNotFoundError:
+        pass
+
     images = get_path_names(output)
     separate(images, '../output_files/Intermediate')
-    remove_excess('../output_files/Intermediate')
+    #remove_excess('../output_files/Intermediate')
     consolidate('../output_files/Intermediate', '../output_files/Consolidated')
-    get_classes('../output_files/Consolidated')
-    split('../output_files/Consolidated', '../datasets')
+    get_classes('../output_files/Consolidated', '../datasets3')
+    split('../output_files/Consolidated', '../datasets3')
 
     print(f'{time.ctime()}: Removing redundant directories and data.')
     shutil.rmtree('../output_files/Remainder')

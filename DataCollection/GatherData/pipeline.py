@@ -1,7 +1,7 @@
 import csv
 import multiprocessing
 import time
-from GatherData.parser import HTMLTableParser
+from parser import HTMLTableParser
 
 
 # crawl function that takes a single html response and parses the data;
