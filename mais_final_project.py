@@ -32,6 +32,7 @@ classes_path = '/content/datasets3 copy/classes.csv'
 
 """Load images in color and display some sample images."""
 
+# read in images
 image_paths = list(glob.glob(f'{dataset_path}/X_train/*.jpeg'))
 X_train = np.stack([cv2.imread(str(x), cv2.IMREAD_COLOR) 
                    for x in image_paths])
@@ -40,6 +41,7 @@ image_paths = list(glob.glob(f'{dataset_path}/X_test/*.jpeg'))
 X_test = np.stack([cv2.imread(str(x), cv2.IMREAD_COLOR) 
                    for x in image_paths])
 
+# display samples 
 img_size = X_train[0].shape
 for i in range(5):
   print(X_train[i].shape)
@@ -54,12 +56,12 @@ def remove_noise(dataset):
       no_noise.append(blur)
   return no_noise
 
-X_train_og = X_train
+'''X_train_og = X_train
 X_train = remove_noise(X_train)
 X_test_og = X_test
-X_test = remove_noise(X_test)
+X_test = remove_noise(X_test)'''
 
-display('Original', PIL.Image.fromarray(X_train_og[0]), 'Blurred', PIL.Image.fromarray(X_train[0]))
+#display('Original', PIL.Image.fromarray(X_train_og[0]), 'Blurred', PIL.Image.fromarray(X_train[0]))
 
 #get the number of classes 
 num_classes = sum(1 for row in open(classes_path, 'r'))
@@ -142,7 +144,7 @@ model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
-callbacks = [EarlyStopping(monitor='val_loss', patience=2),
+callbacks = [EarlyStopping(monitor='val_loss', patience=4),
              ModelCheckpoint(filepath='best_model.h5', monitor='val_loss', save_best_only=True)]
 
 model.compile(loss='categorical_crossentropy',
@@ -159,7 +161,7 @@ model.save(model_path)
 print(f'Saved trained model at {model_path}')
 
 # score trained model
-scores = model.evaluate(X_test, [*y_test], verbose=1)
+scores = model.evaluate(X_test, y_test, verbose=1)
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
 
