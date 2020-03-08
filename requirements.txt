@@ -9,6 +9,7 @@ decorator==4.4.1
 distlib==0.3.0
 filelock==3.0.12
 idna==2.8
+imagecleaner==0.4.4
 ipython==7.12.0
 ipython-genutils==0.2.0
 jedi==0.16.0
@@ -32,3 +33,4 @@ virtualenv==20.0.4
 virtualenv-clone==0.5.3
 virtualenvwrapper==4.8.4
 wcwidth==0.1.8
+wget==3.2
