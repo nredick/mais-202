@@ -5,7 +5,9 @@ Training and test datasets created specifically for this project via webscraping
 
 ## Project Description
 
-The stone classifier project is a webapp that classifies images of stones into four categories (rock, fossil, gemstone, mineral). The dataset was created by scraping and parsing the NMNH Geology Collections Data Portal with BeautifulSoup. Image preprocessing included removal of duplicates, resizing, Gaussian blur to reduce noise. I built the model using Keras/Tensorflow on Google Colab, utilizing a convolutional neural network (CNN). The stone-classifier-webapp backend is based on the Flask module. 
+The stone classifier project is a webapp that classifies images of stones into four categories (rock, fossil, gemstone, mineral). The dataset was created by scraping and parsing the NMNH Geology Collections Data Portal with BeautifulSoup. Image preprocessing included removal of duplicates, resizing, Gaussian blur to reduce noise. 
+
+I built the model using Keras/Tensorflow on Google Colab, utilizing a convolutional neural network (CNN). The stone-classifier-webapp backend is based on the Flask module. 
 
 ## Deploying the Webapp
 
@@ -26,12 +28,12 @@ brew install pipenv
 ```
 pipenv shell
 ```
-*Navigate to the 'stone-classifier-webapp' directory and run the command: *
+*Navigate to the 'stone-classifier-webapp' directory and run the command:*
 ```
 python app.py
 ```
 
--The app is hosted at [http://127.0.0.1:5000/]
+- The app is hosted at [http://127.0.0.1:5000/]
 
 *The 'Stone Classifier' webapp is based on:
 [https://github.com/mtobeiyf/keras-flask-deploy-webapp/blob/master/app.py]*
