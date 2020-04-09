@@ -5,5 +5,4 @@ Creating a data set of images through webscraping. Source: https://geogallery.si
 Preprocessing image and removing duplicates. Creating train and test data, separating into distinct classes. 
 Building convolutional neural network (CNN) model for classifying images of rocks, minerals, gemstones, and fossils. 
 
-API command for dataset: 
-!kaggle datasets download -d nathalieredick/rocks-and-fossils
+Final product deployed via 'stone classifier' webapp.
