@@ -43,7 +43,7 @@ python app.py
 This repository contains the scripts used to webscrape and create the datasets, preprocess and label the original images, train the model, and build the webapp. 
 
 - deliverables/
-> - Contains final project deliverables and proposals for the MAIS 202 course.
+  - Contains final project deliverables and proposals for the MAIS 202 course.
 
 - model/
 > - Python script written on Google Colab to build the CNN.
