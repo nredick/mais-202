@@ -15,7 +15,8 @@ To utilize the webapp, clone the repository to your local machine. Install all p
 ```
 pip install -r requirements.txt
 ```
->The app requires Tensorflow, which utilizes Python 3.5-3.7 and can be run easily within a pipenv shell. 
+>The app requires Tensorflow, which utilizes Python 3.5-3.7 and can be run easily within a pipenv shell.
+
 *Installing pipenv and activating a shell:*
 ```
 brew update
@@ -46,18 +47,20 @@ This repository contains the scripts used to webscrape and create the datasets, 
 >Python script written on Google Colab to build the CNN.
 
 -> stone-classifier-webapp/
-	-> models/
-	>Final CNN model.
-	-> static/
-	>CSS and JS scripts for the landing page.
-	-> templates/
-	>HTML for the landing page.
+
+>-> models/
+>>Final CNN model.
+
+>-> static/
+>>CSS and JS scripts for the landing page.
+
+>-> templates/
+>>HTML for the landing page.
+
 -> webscraping/
-	-> DataCollection		
-		-> GatherData/
-		>methods used to send GET requests for image data, parse HTML responses            
-		using Beautiful Soup, retrieve labels for each image
-		-> Preprocess/
-		>python script to sort images into 4 distinct
-    	  	classes, resize images and remove duplicate images
+>-> DataCollection		
+>>-> GatherData/
+>>Methods used to send GET requests for image data, parse HTML responses using Beautiful Soup, retrieve labels for each image.
+>>-> Preprocess/
+>>python script to sort images into 4 distinct classes, resize images and remove duplicate images
 
