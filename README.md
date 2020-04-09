@@ -16,21 +16,21 @@ To utilize the webapp, clone the repository to your local machine. Install all p
 pip install -r requirements.txt
 ```
 >The app requires Tensorflow, which utilizes Python 3.5-3.7 and can be run easily within a pipenv shell. 
-*Installing pipenv and activating a shell:
+*Installing pipenv and activating a shell:*
 ```
 brew update
 brew install pipenv 
 ```
-*Within main directory (stone-classifier-webapp) run:
+*Within main directory (stone-classifier-webapp) run:*
 ```
 pipenv shell
 ```
-Navigate to the 'stone-classifier-webapp' directory and run the command: 
+*Navigate to the 'stone-classifier-webapp' directory and run the command: *
 ```
 python app.py
 ```
 
-The app is hosted at [http://127.0.0.1:5000/]
+-The app is hosted at [http://127.0.0.1:5000/]
 
 *The 'Stone Classifier' webapp is based on:
 [https://github.com/mtobeiyf/keras-flask-deploy-webapp/blob/master/app.py]*
@@ -39,25 +39,25 @@ The app is hosted at [http://127.0.0.1:5000/]
 
 This repository contains the scripts used to webscrape and create the datasets, preprocess and label the original images, train the model, and build the webapp. 
 
-*deliverables/
+-> deliverables/
 >Contains final project deliverables and proposals for the MAIS 202 course.
 
-*model/
+-> model/
 >Python script written on Google Colab to build the CNN.
 
-*stone-classifier-webapp
-	*models/
+-> stone-classifier-webapp/
+	-> models/
 	>Final CNN model.
-	*static/
+	-> static/
 	>CSS and JS scripts for the landing page.
-	*templates/
+	-> templates/
 	>HTML for the landing page.
-*webscraping/
-	*DataCollection		
-		*GatherData/
+-> webscraping/
+	-> DataCollection		
+		-> GatherData/
 		>methods used to send GET requests for image data, parse HTML responses            
 		using Beautiful Soup, retrieve labels for each image
-		*Preprocess/
+		-> Preprocess/
 		>python script to sort images into 4 distinct
     	  	classes, resize images and remove duplicate images
 
