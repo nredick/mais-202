@@ -42,29 +42,29 @@ python app.py
 
 This repository contains the scripts used to webscrape and create the datasets, preprocess and label the original images, train the model, and build the webapp. 
 
--> deliverables/
->Contains final project deliverables and proposals for the MAIS 202 course.
+- deliverables/
+> - Contains final project deliverables and proposals for the MAIS 202 course.
 
--> model/
->Python script written on Google Colab to build the CNN.
+- model/
+> - Python script written on Google Colab to build the CNN.
 
--> stone-classifier-webapp/
+- stone-classifier-webapp/
 
->-> models/
->>Final CNN model.
+> - models/
+>> - Final CNN model.
 
->-> static/
->>CSS and JS scripts for the landing page.
+> - static/
+>> - CSS and JS scripts for the landing page.
 
->-> templates/
->>HTML for the landing page.
+> - templates/
+>> - HTML for the landing page.
 
--> webscraping/
->-> DataCollection/	
+- webscraping/
+> - DataCollection/	
 
->>-> GatherData/
->>>Methods used to send GET requests for image data, parse HTML responses using Beautiful Soup, retrieve labels for each image.
+>> - GatherData/
+>>> - Methods used to send GET requests for image data, parse HTML responses using Beautiful Soup, retrieve labels for each image.
 
->>-> Preprocess/
->>>Python script to sort images into 4 distinct classes, resize images and remove duplicate images.
+>> - Preprocess/
+>>> - Python script to sort images into 4 distinct classes, resize images and remove duplicate images.
 
