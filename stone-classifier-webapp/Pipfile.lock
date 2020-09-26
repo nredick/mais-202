@@ -507,7 +507,7 @@
                 "sha256:e877fbf373d5be42fb118269df1670b8d3c0df9be223904a2584a8f8ed23b082"
             ],
             "index": "pypi",
-            "version": "==2.1.0"
+            "version": ">=2.1.2"
         },
         "tensorflow-estimator": {
             "hashes": [
