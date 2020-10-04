@@ -62,7 +62,7 @@ This repository contains the scripts used to webscrape and create the datasets, 
   - DataCollection/	
 
   - GatherData/
-    - Methods used to send GET requests for image data, parse HTML responses using Beautiful Soup, retrieve labels for each         image.
+    - Methods used to send GET requests for image data, parse HTML responses using Beautiful Soup, retrieve labels for each image.
 
   - Preprocess/
     - Python script to sort images into 4 distinct classes, resize images and remove duplicate images.
