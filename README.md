@@ -9,6 +9,8 @@ The stone classifier project is a webapp that classifies images of stones into f
 
 I built the model using Keras/Tensorflow on Google Colab, utilizing a convolutional neural network (CNN). The stone-classifier-webapp backend is based on the Flask module. 
 
+The final model had an accuracy of 93.8% and 0.148 on test data. 
+
 ## Deploying the Webapp
 
 The webapp runs locally from the terminal or command line. 
@@ -33,7 +35,7 @@ pipenv shell
 python app.py
 ```
 
-- The app is hosted at [http://127.0.0.1:5000/]
+<!-- - The app is hosted at [http://127.0.0.1:5000/] --> 
 
 *The 'Stone Classifier' webapp is based on:
 [https://github.com/mtobeiyf/keras-flask-deploy-webapp/blob/master/app.py]*
